@@ -1,16 +1,21 @@
 #!/bin/bash
 # srename
 
-echo "What's the name of the show?: "
-read show
-
-echo "What Season of the show is this?: "
-read s
-
-FILES=./*
-i=1
-for f in $FILES
-do
-	mv "$f" "$show S$(printf %02d $s)E$(printf %02d $i).$(printf ${f##*.})"
-	((i++))
+read -p "What's the name of the show?: " show
+read -p "What Season of the show is this?: " s
+read -p "Rename files in $PWD? (yes/no): " yn
+while true; do
+	case $yn in
+		[Yy]* ){
+			FILES=./*
+			i=1
+			for f in $FILES
+			do
+				mv "$f" "$show S$(printf %02d $s)E$(printf %02d $i).$(printf ${f##*.})"
+				((i++))
+			done
+		};break;;
+		[Nn]* ) exit;;
+		* ) 	echo -n "Please respond 'yes' or 'no': ";;
+	esac
 done
