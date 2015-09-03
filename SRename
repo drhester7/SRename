@@ -11,6 +11,6 @@ FILES=./*
 i=1
 for f in $FILES
 do
-	mv "$f" "$show S$(printf %02d $s)E$(printf %02d $i).mkv"
+	mv "$f" "$show S$(printf %02d $s)E$(printf %02d $i).$(printf ${f##*.})"
 	((i++))
 done
