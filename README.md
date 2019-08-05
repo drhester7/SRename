@@ -1,4 +1,6 @@
-# SRename
+# Some Shell Scripts
+
+## SRename
 
 This script is used for renaming the episodes of an entire season of a TV Show within a linux OS.
 Episodes are named with the format [ShowName S##E##.]
