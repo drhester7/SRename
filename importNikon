@@ -1,0 +1,30 @@
+#! /bin/bash
+
+
+#Finding source directory
+echo 'Finding Nikon SD Card Photos directory...'
+nikon="$(find /Volumes -not \( -path /Volumes/GoogleDrive -prune \) -not \( -path Macintosh\ HD -prune \) -name "100D3300")"
+echo $nikon
+
+#Import .NEF photos
+dest="/Users/dohester/Pictures/Nikon/$(date +"%m_%d_%Y")"
+echo "Importing RAW photos to $dest..."
+mkdir $dest
+cp -R -n "$nikon"/*.NEF "$dest"/
+
+#Prompt for deletion of source
+read -r -p 'Import has completed. Do you want to delete all photos from the SD Card? [Y/N]' response
+
+case "$response" in 
+    [Yy][Ee][Ss]|[Yy])
+        #Delete photos
+        echo 'Deleting all photos from SD Card...'
+        rm "$nikon"/*
+        ;;
+    *)
+        #Keep photos
+        echo 'Photos remain on the SD Card.'
+        ;;
+esac
+
+echo 'Complete.'
